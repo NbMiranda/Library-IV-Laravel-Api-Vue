@@ -72,6 +72,16 @@ services:
     networks:
       - app-network
 
+  # phpmyadmin
+  admin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "9090:80"
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - app-network
+
 #Docker Networks
 networks:
   app-network:
