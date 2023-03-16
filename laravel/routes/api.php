@@ -18,7 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/string', function () {
-    return 'Esta é uma string de exemplo!';
-});
+Route::apiResource('book', 'App\Http\Controllers\BookController');
+Route::apiResource('writer', 'App\Http\Controllers\WriterController');
 
