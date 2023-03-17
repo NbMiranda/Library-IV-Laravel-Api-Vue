@@ -83,9 +83,14 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+
         $request->validate($this->book->rules(), $this->book->feedback());
 
         $book = $this->book->find($id);
+
+        
+
         if ($book) {
             $book->update($request->all());
             return $book;
@@ -102,12 +107,13 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        $book = $this->book->with('books')->find($id);        
+        $book = $this->book->find($id);        
 
         if($book === null) {
             return response()->json(['erro' => 'Impossível realizar a exclusão. O recurso solicitado não existe'], 404);
         }  
         
         $book->delete();
+        return response()->json(['msg' => 'Livro deletado com sucesso']);
     }
 }

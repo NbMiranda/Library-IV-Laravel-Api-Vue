@@ -30,7 +30,7 @@ class Book extends Model
 
     public function feedback() {
         return [
-            'required' => 'O campo :attribuite é obrigatório',
+            'required' => 'O campo :attribute é obrigatório',
             'book_name.unique' => 'Livro já cadastrado',
             'book_name.min' => 'O nome deve ter no mínimo 3 caracteres'
         ];
