@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('book_name', 130);
             $table->longText('genre');
-            $table->longText('book_cover')->nullable();
+            $table->string('book_cover')->default('imagemPadrao.png');
             $table->longText('synopsis')->nullable();
             $table->timestamps();
         });
