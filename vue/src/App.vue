@@ -1,19 +1,18 @@
 <template>
-  <div>
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <LoginComponent/>
-  </div>
+  <NavbarComponent />
+  <router-view/>
 </template>
 
 <script>
-import LoginComponent from './components/LoginComponent.vue'
+import NavbarComponent from './components/NavbarCompnent.vue';
+
 
 export default {
-  name: 'App',
   components: {
-    LoginComponent
+    NavbarComponent
   }
 }
+
 </script>
 
 <style>
