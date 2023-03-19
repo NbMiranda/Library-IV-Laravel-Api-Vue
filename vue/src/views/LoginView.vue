@@ -3,9 +3,9 @@
     <h1 class="text-center" style="margin: 7vh;">{{ isLoginActive ? 'Login' : 'Register' }}</h1>
 
     <div class="row" id="login-group">
-      <div class="col-3"></div>
+      <div class="col-sm-0 col-md-1 col-lg-3"></div>
 
-      <div class="col-6">
+      <div class="col-md-10 col-sm-12 col-lg-6">
         <button type="button" class="changeOp mb-4" 
           :class="{ 'active': isLoginActive }"
           @click="setActiveButton('login')">
@@ -66,7 +66,7 @@
         </form>
       </div>
 
-      <div class="col-3"></div>
+      <div class="sol-sm-0 col-md-1 col-lg-3"></div>
     </div>
   </div>
 </template>

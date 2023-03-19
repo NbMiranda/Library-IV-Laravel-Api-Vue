@@ -18,10 +18,10 @@
 
                     </li>
                     <li class="nav-item">
-                        <router-link to="/" class="nav-link" aria-current="page" href="#" v-bind:class="{ active: isBookRoute }">Livros</router-link>
+                        <router-link to="/book" class="nav-link" aria-current="page" href="#" v-bind:class="{ active: isBookRoute }">Livros</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/" class="nav-link" aria-current="page" href="#" v-bind:class="{ active: isWriterRoute }">Escritores</router-link>
+                        <router-link to="/writer" class="nav-link" aria-current="page" href="#" v-bind:class="{ active: isWriterRoute }">Escritores</router-link>
                     </li>
                     
                 </ul>
@@ -66,5 +66,5 @@
 </script>
 
 <style>
-
+    
 </style>
