@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
-{
+{   
+    protected $user;
+    public function __construct(User $user) {
+        $this->user = $user;
+    }
     public function login(Request $request) {
 
     // autentication
@@ -21,6 +26,22 @@ class AuthController extends Controller
     
 
     }
+
+    public function register(Request $request) {
+
+        $request->validate($this->user->rules(), $this->user->feedback());
+
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        return response()->json($user);
+
+    }
+
     public function logout() {
         auth('api')->logout();
         return response()->json(['logout' => 'Logout feito com sucesso']);

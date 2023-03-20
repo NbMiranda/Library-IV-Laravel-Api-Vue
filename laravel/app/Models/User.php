@@ -13,6 +13,26 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function rules(){
+
+        return $regras = [
+            'name' => 'required|min:3',
+            'email' => 'required|unique:users,email,|email',
+            'password' => 'required|min:6',
+        ];
+    }
+
+    public function feedback() {
+        return [
+            'required' => 'O campo :attribute é obrigatório',
+            'name.min' => 'O nome deve ter no mínimo 3 caracteres',
+            'email.email' => 'O email é invalido',
+            'email.unique' => 'O email ja cadastrado',
+
+            'password.min' => 'A senha deve ter no minimo 6 caracteres',
+        ];
+    }
+
     /**
      * The attributes that are mass assignable.
      *
