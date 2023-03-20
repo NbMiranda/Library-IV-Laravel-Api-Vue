@@ -40,11 +40,12 @@
   </template>
 
 <script>
+    import { mapState } from 'vuex'
     export default {
         name: 'NavbarComponent',
         data() {
             return {
-            isLogged: false,
+            // isLogged: false,
             };
         },
         computed: {
@@ -57,7 +58,9 @@
             isWriterRoute() {
             return this.$route.path === '/writer';
             },
-
+            ...mapState({
+                isLogged: state => state.isLogged
+            })
         }
 
 

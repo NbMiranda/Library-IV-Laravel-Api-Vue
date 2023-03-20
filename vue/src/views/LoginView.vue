@@ -68,46 +68,85 @@
       </div>
 
       <div class="sol-sm-0 col-md-1 col-lg-3"></div>
+
+      <!-- Exibição da mensagem de erro -->
+      <div v-show="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Exibição da mensagem de sucesso -->
+      <div v-show="successMessage" class="alert alert-success" role="alert">
+        {{ successMessage }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import { mapState, mapMutations } from 'vuex'
+
 export default {
   name: "LoginView",
+  computed:{
+    ...mapState({
+        successMessage: state => state.successMessage
+      })
+  },
   data() {
     return {
       isLoginActive: true,
-      
+      errorMessage: '',
       
     };
   },
-  methods: {
 
+  methods: {
+    passwordsMatch() {
+      return this.password1 === this.password2;
+    },
     submitForm() {
+      if (!this.passwordsMatch() && !this.isLoginActive ) {
+        this.errorMessage = 'As senhas não correspondem.';
+        return;
+      }
       const endpoint = this.isLoginActive ? "http://localhost/api/login" : "http://localhost/api/register";
-      fetch(endpoint, {
-        method: "POST",
-        body: new FormData(event.target),
-      })
-      .then((response) => {
-          location.reload()
+      axios.post(endpoint, new FormData(event.target))
+        .then((response) => {
+          if (this.isLoginActive) {
+            this.$router.push('/');
+            this.$store.commit('logInto', response.data.token);
+
+          } 
+          else {
+            this.showSuccessMessage();
+            this.isLoginActive = true
+            this.hidePassword()
+            // location.reload();
+            
+          }
           console.log(response)
-      })
-      .catch((error) => {
-          console.error(error);
-      });
+          
+        })
+        .catch((error) => {
+          console.error(error.response.data.message);
+          this.errorMessage = error.response.data.message;
+          this.clearErrorMessageAfterDelay(5000);
+        });
+    },
+    ...mapMutations([
+      'showSuccessMessage'
+    ]),
+
+    // Método para alternar entre login e registro
+    toggleLogin() {
+      this.isLoginActive = !this.isLoginActive;
     },
 
-  // Método para alternar entre login e registro
-  toggleLogin() {
-    this.isLoginActive = !this.isLoginActive;
-  },
-
-  // Método para validar campos de entrada
-  validateFields() {
-    // Realizar validação dos campos de entrada aqui
-  },
+    // Método para validar campos de entrada
+    validateFields() {
+      // Realizar validação dos campos de entrada aqui
+    },
 
     setActiveButton(button) {
       if (button === "login") {
@@ -135,7 +174,11 @@ export default {
       }
       this.show = !this.show;
     },
-
+    clearErrorMessageAfterDelay(delay) {
+      setTimeout(() => {
+        this.errorMessage = '';
+      }, delay);
+    },
 
   },
 };
@@ -176,4 +219,24 @@ input::placeholder {
 
 }
 
+.alert{
+    width: 33vh;
+    position: fixed;
+    bottom: 5vh;
+    right: 1vh;
+    width: 33vh;
+    position: fixed;
+    bottom: 5vh;
+    right: 1vh;
+  }
+.alert-danger {
+  color: black;
+  background-color: #ff1919ba;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.10) !important;
+}
+.alert-success {
+  color: black;
+  background-color: #28db89e8;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.10) !important;
+}
 </style>

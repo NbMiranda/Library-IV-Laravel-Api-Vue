@@ -16,5 +16,8 @@ export default {
 </script>
 
 <style>
+  #app{
+    font-family: Arial, sans-serif
+  }
   @import '~bootstrap/dist/css/bootstrap.css';
 </style>
