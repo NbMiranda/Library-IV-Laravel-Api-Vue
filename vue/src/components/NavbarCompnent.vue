@@ -28,7 +28,7 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <router-link to="/login" v-if="!isLogged" class="nav-link">Login</router-link>
-                        <router-link to="/logout" v-if="isLogged" class="nav-link">Logout</router-link>
+                        <a v-if="isLogged" @click="logoutRoute()" class="nav-link">Log out</a>
                     </li>
                 </ul>
             </div>
@@ -40,12 +40,13 @@
   </template>
 
 <script>
-    import { mapState } from 'vuex'
+    import axios from 'axios'
+    let getIsLogged = localStorage.getItem("isLogged")
     export default {
         name: 'NavbarComponent',
         data() {
             return {
-            // isLogged: false,
+            isLogged: getIsLogged,
             };
         },
         computed: {
@@ -58,9 +59,29 @@
             isWriterRoute() {
             return this.$route.path === '/writer';
             },
-            ...mapState({
-                isLogged: state => state.isLogged
-            })
+        },
+        methods: {
+            logoutRoute() {
+                axios.post('http://localhost/api/lib/logout', {}, {
+                    headers: {
+                        Authorization: 'Bearer ' + window.localStorage.token // substitua 'token' pelo seu token real
+                    }
+                })
+                .then(() => {
+                // fazer algo em caso de sucesso
+                this.$router.push('/login');
+
+                console.log("Deslogado");
+                this.isLogged = false
+
+                localStorage.removeItem('isLogged');
+                })
+                .catch(error => {
+                // fazer algo em caso de erro
+                    
+                console.log(error);
+                });
+            }
         }
 
 
@@ -79,4 +100,7 @@
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.3) !important;
         border: 1px solid #0000009c !important;
     }
+    .nav-link:hover{
+        cursor: pointer;
+    }   
 </style>

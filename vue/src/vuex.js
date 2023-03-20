@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import createPersistedState from "vuex-persistedstate";
 
 const store = createStore({
   state: {
@@ -11,14 +12,22 @@ const store = createStore({
     logInto: (state, token) => {
         state.isLogged = true;
         state.token = token;
+        
+        localStorage.setItem("token", token);
+        localStorage.setItem("isLogged", true);
       },
   },
   actions: {
     // definir ações
   },
+  plugins: [
+    createPersistedState({
+      path: ['isLogged', 'token']
+    })
+  ],
   getters: {
-    // definir getters
-  }
+    token: (state) => state.token
+  },
 })
 
 export default store

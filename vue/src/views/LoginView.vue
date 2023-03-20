@@ -114,9 +114,13 @@ export default {
       axios.post(endpoint, new FormData(event.target))
         .then((response) => {
           if (this.isLoginActive) {
-            this.$router.push('/');
-            this.$store.commit('logInto', response.data.token);
+            // this.$router.push('/');
+            this.$router
+            .push({ path: '/' })
+            .then(() => { this.$router.go() })
 
+            this.$store.commit('logInto', response.data.token);
+            
           } 
           else {
             this.showSuccessMessage();
@@ -125,6 +129,7 @@ export default {
             // location.reload();
             
           }
+          location.reload();
           console.log(response)
           
         })

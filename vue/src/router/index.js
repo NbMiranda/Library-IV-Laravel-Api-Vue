@@ -4,6 +4,9 @@ import LibraryView from '../views/LibraryView.vue'
 import WriterView from '../views/WriterView.vue'
 import BookView from '../views/BookView.vue'
 
+// import { mapState } from 'vuex'
+// import axios from 'axios'
+
 
 const routes = [
   {
@@ -37,7 +40,8 @@ const routes = [
     meta: {
       title: 'Livros'
     }
-  }
+  },
+  
 ]
 
 const router = createRouter({
