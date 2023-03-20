@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1 class="text-center">Bibloteca</h1>
+  <div class="container">
+    <h2 class="m-4"><i>Biblioteca</i></h2>
   </div>
 </template>
 

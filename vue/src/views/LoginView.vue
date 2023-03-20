@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <h1 class="text-center" style="margin: 7vh;">{{ isLoginActive ? 'Login' : 'Register' }}</h1>
+    <h2 class="m-4" ><i>{{ isLoginActive ? 'Login' : 'Register' }}</i></h2>
 
     <div class="row" id="login-group">
       <div class="col-sm-0 col-md-1 col-lg-3"></div>
 
-      <div class="col-md-10 col-sm-12 col-lg-6">
+      <div class="col-md-10 col-sm-12 col-lg-6 mt-2">
         <button type="button" class="changeOp mb-4" 
           :class="{ 'active': isLoginActive }"
           @click="setActiveButton('login')">
@@ -18,7 +18,8 @@
           Register
         </button>
 
-        <form autocomplete="off">
+        <form autocomplete="off" @submit.prevent="submitForm">
+
           <!-- Name -->
           <div class="mb-3">
             <label for="nameInput" class="form-label" v-if="!isLoginActive">Nome</label>
@@ -82,8 +83,35 @@ export default {
     };
   },
   methods: {
+
+    submitForm() {
+      const endpoint = this.isLoginActive ? "http://localhost/api/login" : "http://localhost/api/register";
+      fetch(endpoint, {
+        method: "POST",
+        body: new FormData(event.target),
+      })
+      .then((response) => {
+          location.reload()
+          console.log(response)
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+    },
+
+  // Método para alternar entre login e registro
+  toggleLogin() {
+    this.isLoginActive = !this.isLoginActive;
+  },
+
+  // Método para validar campos de entrada
+  validateFields() {
+    // Realizar validação dos campos de entrada aqui
+  },
+
     setActiveButton(button) {
       if (button === "login") {
+        location.reload()
         this.isLoginActive = true;
       } else if (button === "register") {
         this.isLoginActive = false;

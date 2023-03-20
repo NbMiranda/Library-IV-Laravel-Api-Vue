@@ -1,6 +1,6 @@
 <template>
-    <div>
-      <h1 class="text-center">Livros</h1>
+    <div class="container">
+      <h2 class="m-4"><i>Livros</i></h2>
     </div>
   </template>
   

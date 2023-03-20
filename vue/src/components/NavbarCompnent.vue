@@ -66,5 +66,14 @@
 </script>
 
 <style>
-    
+    .navbar-toggler{
+        border: none !important;
+        color: rgba(181, 29, 29, 0.4) !important;
+    }
+    .navbar-toggler:focus {
+        text-decoration: none;
+        outline: 0;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.3) !important;
+        border: 1px solid #0000009c !important;
+    }
 </style>
