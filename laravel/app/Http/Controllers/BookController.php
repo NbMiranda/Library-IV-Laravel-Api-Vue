@@ -159,7 +159,7 @@ class BookController extends Controller
         $book = $this->book->find($id);        
 
         if($book === null) {
-            return response()->json(['erro' => 'Impossível realizar a exclusão. O recurso solicitado não existe'], 404);
+            return response()->json(['erro' => 'Impossível realizar a exclusão. O recurso solicitado não existe'], 400);
         }  
         
         Storage::disk('public')->delete($book->book_cover);        

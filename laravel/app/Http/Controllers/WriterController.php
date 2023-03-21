@@ -119,7 +119,7 @@ class WriterController extends Controller
             $bookName = $writer->books->first()->book_name;
 
             
-            return response()->json(['erro' => "Não é possivel deletar, escritor acossiado ao livro $bookName"]);
+            return response()->json(['erro' => "Não é possivel deletar, escritor acossiado ao livro $bookName"], 400);
         }
    
     }

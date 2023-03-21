@@ -212,6 +212,7 @@ export default {
       .then(response => {
         if (response.ok) {
           console.log("Escritor deletado com sucesso");
+          console.log(response)
           this.isEditing = null;
           setTimeout(() => {
             location.reload();
@@ -219,7 +220,11 @@ export default {
           this.success = "Escritor deletado com sucesso"
           
         } else {
-          console.error('Erro ao excluir usuário:', response.status);
+          console.error('Erro ao excluir usuário:', response);
+          this.warning = "Erro! Escritor associado a algum livro";
+          setTimeout(() => {
+            this.warning = null;
+          }, 2500);
           
         }
       })
