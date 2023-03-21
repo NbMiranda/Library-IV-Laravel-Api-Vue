@@ -12,6 +12,9 @@ export default {
     NavbarComponent
   }
 }
+// function genres() {
+//   return ['Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Sci-Fi', 'Thriller', 'Documentary', 'Animation', 'Adventure'];
+// }
 
 </script>
 

@@ -23,7 +23,7 @@
       <div class="col-1"></div>
 
       <div class="col-5">
-        <img src="../assets/study.png" style="height: 35vh;">
+        <img src="../assets/study.png" style="height: 50vh;">
       </div>
     </div>
   </div>
@@ -51,5 +51,8 @@ export default {
     font-size: 25px;
     transition: .3s;
     
+  }
+  #paragraph{
+    font-size: 1.3em;
   }
 </style>

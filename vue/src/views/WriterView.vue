@@ -119,11 +119,11 @@ export default {
         console.log(error)
       })
     },
-    mounted() {
+  mounted() {
     const isLogged = localStorage.isLogged
     if (isLogged !== 'true') {
       this.$router.push('/login'); // redireciona para a rota de login
-    }
+  }
   },
   name: 'WriterView',
   data() {
@@ -186,7 +186,7 @@ export default {
         }
       })
       .then(() => {
-        console.log("Escritor atualizado com sucesso")
+        console.log("Livro atualizado com sucesso")
         this.success = "Escritor atualizado com sucesso"; 
         setTimeout(() => {
           this.success = null;

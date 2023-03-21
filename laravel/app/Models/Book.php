@@ -12,6 +12,7 @@ class Book extends Model
     protected $fillable = [
         'book_name', 
         'genre', 
+        'other_genre', 
         'book_cover', 
         'writer_id', 
         'synopsis',
@@ -26,7 +27,7 @@ class Book extends Model
         return [
             'book_name' => 'required|unique:books,book_name,'.$this->id.'|min:3',
             'book_cover' => 'file|mimes:png,jpg',
-            'genre' => 'min:3',
+            'genre' => 'required',
         ];
     }
 
@@ -35,7 +36,7 @@ class Book extends Model
             'required' => 'O campo :attribute é obrigatório',
             'book_name.unique' => 'Livro já cadastrado',
             'book_name.min' => 'O nome deve ter no mínimo 3 caracteres',
-            'genre.min' => 'O genero deve ter no mínimo 3 caracteres'
+            
         ];
     }
 }

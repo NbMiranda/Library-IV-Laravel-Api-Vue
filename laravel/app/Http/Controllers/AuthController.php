@@ -14,7 +14,9 @@ class AuthController extends Controller
     public function login(Request $request) {
 
     // autentication
-    $data = $request->all();
+    $data = $request->all(['email', 'password']); //[]
+
+    //autenticação (email e senha)
     $token = auth('api')->attempt($data);
     // dd($token);
     

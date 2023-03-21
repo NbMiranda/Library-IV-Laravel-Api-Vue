@@ -3,6 +3,7 @@ import LoginView from '../views/LoginView.vue'
 import LibraryView from '../views/LibraryView.vue'
 import WriterView from '../views/WriterView.vue'
 import BookView from '../views/BookView.vue'
+import ShowBookView from '../views/ShowBookView.vue'
 
 // import { mapState } from 'vuex'
 // import axios from 'axios'
@@ -44,6 +45,16 @@ const routes = [
     meta: {
       title: 'Livros'
     },
+    
+  },
+  {
+    path: '/show-book/:id',
+    name: 'ShowBookView',
+    component: ShowBookView,
+    meta: {
+      title: 'Livros'
+    },
+    props: true
   },
   
 ]

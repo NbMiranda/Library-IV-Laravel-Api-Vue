@@ -241,7 +241,7 @@ input::placeholder {
 }
 .alert-success {
   color: black;
-  background-color: #75db46ef;
+  background-color: #89ff9def;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.10) !important;
 }
 </style>

@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('book_name', 130);
-            $table->longText('genre');
+            $table->string('genre');
+            $table->longText('other_genre')->nullable();
             $table->string('book_cover')->default('imagemPadrao.png');
             $table->longText('synopsis')->nullable();
             $table->timestamps();

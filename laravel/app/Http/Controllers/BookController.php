@@ -21,7 +21,8 @@ class BookController extends Controller
      */
     public function index()
     {   
-        return $this->book->all();
+        // return $this->book->all();
+        return $this->book->with('writer')->get();
         
     }
     /**
@@ -59,8 +60,10 @@ class BookController extends Controller
         $book = $this->book->create([
             'book_name' => $request->book_name,
             'genre' => $request->genre,
+            'other_genre' => $request->other_genre,
             'writer_id' => $request->writer_id,
-            'book_cover' => $imagem_urn
+            'book_cover' => $imagem_urn,
+            'synopsis' => "Digite aqui a sinopse do seu livro!"
         ]);
         return $book;
     }
@@ -134,11 +137,11 @@ class BookController extends Controller
         }
         
         $imagem = $request->file('book_cover');
-        $imagem_urn = $imagem->store('images', 'public');
+        // $imagem_urn = $imagem->store('images', 'public');
 
         //preencher o objeto $marca com os dados do request
         $book->fill($request->all());
-        $book->book_cover = $imagem_urn;
+        // $book->book_cover = $imagem_urn;
         //dd($marca->getAttributes());
         $book->save();
 
