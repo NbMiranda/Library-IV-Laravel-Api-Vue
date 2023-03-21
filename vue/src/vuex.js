@@ -26,7 +26,8 @@ const store = createStore({
     })
   ],
   getters: {
-    token: (state) => state.token
+    token: (state) => state.token,
+    isLogged: (state) => state.isLogged
   },
 })
 

@@ -1,7 +1,7 @@
 <template>
  
     <div id="navbar" class="container navbar navbar-expand-lg navbar sticky-top">
-        <div class="container-fluid">
+        <div class="container-fluid" style="background-color: white;">
             <router-link to="/" class="navbar-brand" href="#">
                 <img src="../assets/open-book.png"
                     alt="Senna" width="45" height="42">

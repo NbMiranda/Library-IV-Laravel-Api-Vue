@@ -236,12 +236,12 @@ input::placeholder {
   }
 .alert-danger {
   color: black;
-  background-color: #ff1919ba;
+  background-color: #fc6060da;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.10) !important;
 }
 .alert-success {
   color: black;
-  background-color: #03b93cba;
+  background-color: #75db46ef;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.10) !important;
 }
 </style>

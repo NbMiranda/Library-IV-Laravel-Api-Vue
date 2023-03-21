@@ -119,6 +119,12 @@ export default {
         console.log(error)
       })
     },
+    mounted() {
+    const isLogged = localStorage.isLogged
+    if (isLogged !== 'true') {
+      this.$router.push('/login'); // redireciona para a rota de login
+    }
+  },
   name: 'WriterView',
   data() {
     return {

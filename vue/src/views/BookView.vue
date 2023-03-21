@@ -7,7 +7,12 @@
   <script>
   export default {
     name: 'BookView',
-  
+    mounted() {
+    const isLogged = localStorage.isLogged
+    if (isLogged != 'true') {
+      this.$router.push('/login'); // redireciona para a rota de login
+    }
+  }
     
   }
   </script>
