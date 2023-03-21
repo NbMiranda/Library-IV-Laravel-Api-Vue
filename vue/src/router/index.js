@@ -31,15 +31,19 @@ const routes = [
     component: WriterView,
     meta: {
       title: 'Escritores'
-    }
+    },
+    // beforeMount() {
+    //   this.getWriters(); // substitua "suaFuncao" pelo nome da sua função
+    // }
   },
+  
   {
     path: '/book',
     name: 'BookView',
     component: BookView,
     meta: {
       title: 'Livros'
-    }
+    },
   },
   
 ]
