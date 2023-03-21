@@ -23,7 +23,7 @@ class AuthController extends Controller
     if ($token) {
         return response()->json(['token' => $token]);  
     } else {
-        return response()->json(['erro' => 'usuario ou senha invalidos']);  
+        return response()->json(['erro' => 'usuario ou senha invalidos'], 403);  
     }
     
 

@@ -69,34 +69,23 @@
 
       <div class="sol-sm-0 col-md-1 col-lg-3"></div>
 
-      <!-- Exibição da mensagem de erro -->
-      <div v-show="errorMessage" class="alert alert-danger" role="alert">
-        {{ errorMessage }}
-      </div>
-
-      <!-- Exibição da mensagem de sucesso -->
-      <div v-show="successMessage" class="alert alert-success" role="alert">
-        {{ successMessage }}
-      </div>
+      <!-- Mensagens -->
+      <div class="alert alert-danger" v-if="warning">{{ warning }}</div>
+      <div class="alert alert-success" v-if="success">{{ success }}</div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: "LoginView",
-  computed:{
-    ...mapState({
-        successMessage: state => state.successMessage
-      })
-  },
   data() {
     return {
       isLoginActive: true,
-      errorMessage: '',
+      warning: null,
+      success: null,
       
     };
   },
@@ -107,41 +96,51 @@ export default {
     },
     submitForm() {
       if (!this.passwordsMatch() && !this.isLoginActive ) {
-        this.errorMessage = 'As senhas não correspondem.';
+        this.warning = 'As senhas não correspondem.';
+        setTimeout(() => {
+          this.warning = null;
+        }, 1500);
         return;
       }
       const endpoint = this.isLoginActive ? "http://localhost/api/login" : "http://localhost/api/register";
       axios.post(endpoint, new FormData(event.target))
         .then((response) => {
           if (this.isLoginActive) {
-            // this.$router.push('/');
-            this.$router
-            .push({ path: '/' })
-            .then(() => { this.$router.go() })
-
+            this.success = "Logado com sucesso"       
+            setTimeout(() => {
+              location.reload();
+            }, 800);
+            
+            this.$router.push('/');
+                      
             this.$store.commit('logInto', response.data.token);
             
           } 
           else {
-            this.showSuccessMessage();
+            this.success = "usuario registrado com sucesso";       
+            setTimeout(() => {
+              this.success = null;
+            }, 800);
+
             this.isLoginActive = true
             this.hidePassword()
-            // location.reload();
+            
             
           }
-          location.reload();
+          // location.reload();
+          
           console.log(response)
           
         })
         .catch((error) => {
-          console.error(error.response.data.message);
-          this.errorMessage = error.response.data.message;
-          this.clearErrorMessageAfterDelay(5000);
+            this.warning = error.response.data.erro; 
+          setTimeout(() => {
+            this.warning = null;
+          }, 1500);
+                   
+          console.log(error);
         });
     },
-    ...mapMutations([
-      'showSuccessMessage'
-    ]),
 
     // Método para alternar entre login e registro
     toggleLogin() {
@@ -179,11 +178,7 @@ export default {
       }
       this.show = !this.show;
     },
-    clearErrorMessageAfterDelay(delay) {
-      setTimeout(() => {
-        this.errorMessage = '';
-      }, delay);
-    },
+
 
   },
 };
@@ -241,7 +236,6 @@ input::placeholder {
 }
 .alert-success {
   color: black;
-  background-color: #89ff9def;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.10) !important;
 }
 </style>
